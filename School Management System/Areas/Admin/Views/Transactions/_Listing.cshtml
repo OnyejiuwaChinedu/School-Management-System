@@ -1,0 +1,48 @@
+﻿@model School_Management_System.Areas.Models.TransactionsListViewModel    
+
+@if (Model != null && Model.Transactions != null && Model.Transactions.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Transaction_Name</th>
+                <th scope="col">Student_Id</th>
+                <th scope="col">Transaction_Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Transactions != null)
+            {
+                foreach (var transactions in Model.Transactions)
+                {
+                    <tr>
+                        <td>
+                            @transactions.Transaction_Name
+                        </td>
+                        <td>
+                            @transactions.Student_Id
+                        </td>
+                        <td>
+                            @transactions.Transaction_Date
+                        </td>
+
+                        <td>
+                            <button data-href="@Url.Action("Action", "Transactions", new { Id = transactions.Id })" type="button" class="data-btn btn btn-success" data-bs-toggle="modal" data-bs-target="#actionModal"><i class="fa-solid fa-pen mr-1"></i>Edit</button>
+                            <button data-href="@Url.Action("Delete", "Transactions", new { Id = transactions.Id })" type="button" class="data-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#actionModal"><i class="fa-solid fa-trash-can mr-1"></i>Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
+
+
+

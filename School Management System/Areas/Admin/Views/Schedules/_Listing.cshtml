@@ -1,0 +1,57 @@
+﻿
+@model School_Management_System.Areas.Models.SchedulesListViewModel
+
+@if (Model != null && Model.Schedules != null && Model.Schedules.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Student_Id</th>
+                <th scope="col">Course_Id</th>
+                <th scope="col">Staff_Id</th>
+                <th scope="col">Time_Start</th>
+                <th scope="col">End_Date</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Schedules != null)
+            {
+                foreach (var schedules in Model.Schedules)
+                {
+            <tr>
+                <td>
+                    @schedules.Student_Id
+                </td>
+                <td>
+                    @schedules.Course_Id
+                </td>
+                <td>
+                    @schedules.Staff_Id
+                </td>
+                <td>
+                    @schedules.Time_Start
+                </td>
+                <td>
+                    @schedules.End_Date
+                </td>
+
+                <td>
+                    <button data-href="@Url.Action("Action", "Schedules", new { Id = schedules.Id })" type="button" class="data-btn btn btn-success" data-bs-toggle="modal" data-bs-target="#actionModal"><i class="fa-solid fa-pen mr-1"></i>Edit</button>
+                    <button data-href="@Url.Action("Delete", "Schedules", new { Id = schedules.Id })" type="button" class="data-btn btn btn-danger" data-bs-toggle="modal" data-bs-target="#actionModal"><i class="fa-solid fa-trash-can mr-1"></i>Delete</button>
+                </td>
+            </tr>
+                }
+            }
+
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Sorry! No records exist.
+    </div>
+}
+
+
